@@ -78,7 +78,7 @@ const menuItems = [
 
 function Sidebar() {
   return (
-    <div className="sticky top-[40px]">
+    <div className="sticky top-[40px] ">
       <div className="flex items-center gap-5 mb-5">
         <Image
           src="/noavatar.png"
@@ -104,6 +104,10 @@ function Sidebar() {
           </li>
         ))}
       </ul>
+      <button className="p-5 flex items-center gap-2.5 my-[5px] rounded-lg hover:bg-[#2e374a] w-full">
+        <MdLogout />
+        Logout
+      </button>
     </div>
   );
 }
