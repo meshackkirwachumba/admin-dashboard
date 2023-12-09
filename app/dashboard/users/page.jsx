@@ -2,8 +2,13 @@ import SearchInput from "@/app/ui/dashboard/search/search";
 import Link from "next/link";
 import Image from "next/image";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
+import { fetchUsers } from "@/app/lib/data";
 
-function UsersPage({ placeholder }) {
+async function UsersPage({ searchParams }) {
+  const q = searchParams?.q || "";
+  const page = searchParams?.page || 1;
+  const { count, users } = await fetchUsers(q, page);
+
   return (
     <div className="bg-[var(--bgSoft)] p-5 rounded-lg mt-3">
       {/* search functionality */}
@@ -28,40 +33,46 @@ function UsersPage({ placeholder }) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="p-2.5">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/noavatar.png"
-                  width={40}
-                  height={40}
-                  className="object-cover rounded-full"
-                />
-                John Doe
-              </div>
-            </td>
-            <td className="p-2.5">john@gmail.com</td>
-            <td className="p-2.5">13.01.2022</td>
-            <td className="p-2.5">Admin</td>
-            <td className="p-2.5">Active</td>
-            <td className="p-2.5">
-              <div className="flex items-center gap-3">
-                <Link href="/dashboard/users/123">
-                  <button className="px-3 py-1.5 rounded-lg bg-teal-500 text-[var(--text)] text-xs">
-                    View
+          {users.map((user) => (
+            <tr key={user._id}>
+              <td className="p-2.5">
+                <div className="flex items-center gap-3 ">
+                  <div className="relative h-8 w-8">
+                    <Image
+                      src={user.img || "/noavatar.png"}
+                      alt=""
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                  {user.username}
+                </div>
+              </td>
+              <td className="p-2.5">{user.email}</td>
+              <td className="p-2.5">
+                {user.createdAt?.toString().slice(4, 16)}
+              </td>
+              <td className="p-2.5">{user.isAdmin ? "Admin" : "User"}</td>
+              <td className="p-2.5">{user.isActive ? "Active" : "Inactive"}</td>
+              <td className="p-2.5">
+                <div className="flex items-center gap-3">
+                  <Link href={`/dashboard/users/${user._id}`}>
+                    <button className="px-3 py-1.5 rounded-lg bg-teal-500 text-[var(--text)] text-xs">
+                      View
+                    </button>
+                  </Link>
+                  <button className="px-3 py-1.5 rounded-lg bg-rose-500 text-[var(--text)] text-xs">
+                    Delete
                   </button>
-                </Link>
-                <button className="px-3 py-1.5 rounded-lg bg-rose-500 text-[var(--text)] text-xs">
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
       {/* pagination component */}
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 }
