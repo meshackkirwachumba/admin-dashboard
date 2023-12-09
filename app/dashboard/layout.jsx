@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../ui/dashboard/sidebar/sidebar";
 import Navbar from "../ui/dashboard/navbar/navbar";
+import Footer from "./footer/Footer";
 
 function DashboardLayout({ children }) {
   return (
@@ -13,6 +14,7 @@ function DashboardLayout({ children }) {
       <div className="flex-[4] p-[20px]">
         <Navbar />
         {children}
+        <Footer />
       </div>
     </div>
   );

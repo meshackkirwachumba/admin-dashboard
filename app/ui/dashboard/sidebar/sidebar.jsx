@@ -78,7 +78,7 @@ const menuItems = [
 
 function Sidebar() {
   return (
-    <div className="sticky top-[40px] ">
+    <div className="sticky top-[40px] min-h-screen">
       <div className="flex items-center gap-5 mb-5">
         <Image
           src="/noavatar.png"
