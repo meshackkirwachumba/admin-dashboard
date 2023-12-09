@@ -46,7 +46,7 @@ function UsersPage({ placeholder }) {
             <td className="p-2.5">Active</td>
             <td className="p-2.5">
               <div className="flex items-center gap-3">
-                <Link href="/">
+                <Link href="/dashboard/users/123">
                   <button className="px-3 py-1.5 rounded-lg bg-teal-500 text-[var(--text)] text-xs">
                     View
                   </button>
