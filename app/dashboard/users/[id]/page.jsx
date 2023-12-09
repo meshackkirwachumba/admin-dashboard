@@ -48,7 +48,7 @@ const SingleUserPage = () => {
           <textarea
             className="custom-class"
             type="text"
-            name="username"
+            name="address"
             placeholder="Nairobi"
           />
           <label className="text-[12px]">Is Admin?</label>

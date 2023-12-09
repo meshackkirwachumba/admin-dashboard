@@ -47,7 +47,7 @@ function ProductsPage() {
             <td className="p-2.5">79</td>
             <td className="p-2.5">
               <div className="flex items-center gap-3">
-                <Link href="/">
+                <Link href="/dashboard/products/1">
                   <button className="px-3 py-1.5 rounded-lg bg-teal-500 text-[var(--text)] text-xs">
                     View
                   </button>
